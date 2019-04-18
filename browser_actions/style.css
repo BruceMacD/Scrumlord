@@ -1,0 +1,49 @@
+body {
+    min-width:200px;
+    color: white;
+    background: #100e17;
+}
+
+.center {
+    margin: auto;
+    width: 100%;
+    text-align:center;
+}
+
+button {
+    height: 5%;
+    width: 60%;
+    border: 0.1em;
+    font-size: 0.8em; 
+    margin-bottom: 3%;
+}
+
+.btn-start {
+    background-image: linear-gradient(to right,#ff8a00,#da1b60);    
+}
+
+button:hover {
+    background-color: #ddd;
+    color: black;
+}
+  
+.nav {
+    background-color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    width: 10%;
+    font-size: 1em;
+    color: black;
+    border-radius: 100%;
+    margin-bottom: 3%;
+}
+
+.nav-prev {
+    float: left;
+    margin-left: 5%;
+}
+
+.nav-next {
+    float: right;
+    margin-right: 5%;
+}

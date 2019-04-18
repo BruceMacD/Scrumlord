@@ -1,0 +1,25 @@
+.center {
+    margin: auto;
+    width: 50%;
+    text-align:center;
+}
+
+button {
+    height: 5%;
+    width: 85%;
+    border: 0.1em;
+    font-size: 1.8em; 
+    margin-bottom: 3%;
+}
+
+#templateButton {
+    width: 70%;
+}
+
+#deleteButton {
+    width: 15%;
+}
+
+p {
+    font-size: 18px; 
+}
