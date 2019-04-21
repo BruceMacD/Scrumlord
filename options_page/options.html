@@ -5,28 +5,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
 
     <body>
-      <div class="center">
-        <div id="templates">
-          <h1>Stored Templates</h1>
-          <div id="templateContainer"></div>
-          <button class="btn btn-success" id="addNewTemplate">+</button>
-        </div>
-        
-        <div id="newTemplate">
-          <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" required>
+      <h1>𝖘𝖈𝖗𝖚𝖒𝖑𝖔𝖗𝖉</h1>
+      <div class="centerContainer" id="centerContainer">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Teams</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Members</a>
+          </li>
+        </ul>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Team name" aria-label="Team name" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Save</button>
+            <button class="btn btn-outline-secondary" type="button">Remove</button>
           </div>
-          <div class="form-group">
-            <label for="template">Template Text</label>
-            <textarea class="form-control" rows="5" id="template" required></textarea>
-          </div>
-          <button class="btn btn-success" id="saveTemplate">SAVE</button>
-          <button class="btn btn-secondary" id="cancelButton">CANCEL</button>
         </div>
       </div>
 

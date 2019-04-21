@@ -1,25 +1,27 @@
-.center {
+body {
+    min-width:200px;
+    color: white;
+    background: #100e17;
+}
+
+h1 {
     margin: auto;
+    font-size: 3em;
     width: 50%;
-    text-align:center;
+    padding: 10px;
+    text-align: center;
+    margin-top: 10%;
 }
 
-button {
-    height: 5%;
-    width: 85%;
-    border: 0.1em;
-    font-size: 1.8em; 
-    margin-bottom: 3%;
-}
-
-#templateButton {
-    width: 70%;
-}
-
-#deleteButton {
-    width: 15%;
-}
-
-p {
-    font-size: 18px; 
+.centerContainer {
+    background: white;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1.3em;
+    position: absolute;
+    z-index: 10;
+    margin-top: 10%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    max-width: 90%;
+    padding-bottom: 0.5em;
 }
