@@ -29,3 +29,9 @@ h1 {
 .input-group {
     padding: 0.1em;
 }
+
+.nav-link:hover {
+    cursor:pointer;
+    background-color: grey;
+    color: white;
+}
