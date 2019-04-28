@@ -11,15 +11,13 @@ var teamToMember = {}
 function saveTeamName(oldTeamName, newTeamName) {
   chrome.storage.sync.get(["scrum-teams"], function(storedTeams) {
     var teams = storedTeams ? storedTeams["scrum-teams"] : {};
-    console.log(teams);
     
     if (oldTeamName)
     {
       delete teams[oldTeamName];    
     }
     // new empty team
-    teams[newTeamName] =
-      {"bruce": "example.com"};
+    teams[newTeamName] = {};
 
     // update the stored templates
     chrome.storage.sync.set({ "scrum-teams": teams }, function(){
@@ -27,6 +25,26 @@ function saveTeamName(oldTeamName, newTeamName) {
     });
 
     location.reload();
+  });
+}
+
+function updateTeamMembers()
+{
+  chrome.storage.sync.get(["scrum-teams"], function(storedTeams) {
+    var teams = storedTeams ? storedTeams["scrum-teams"] : {};    
+    console.log(teams);
+    console.log(teamToMember);
+    for(var team in teamToMember) {
+      try {
+        teams[team] = JSON.parse(teamToMember[team]);
+      } catch(e) {
+        console.log("unable to parse: " + team)
+      }
+    }
+
+    chrome.storage.sync.set({ "scrum-teams": teams }, function(){
+      console.log("teams updated");
+    });
   });
 }
 
@@ -120,8 +138,6 @@ function appendTeamMemberInput(teamName, members) {
   }
   textArea.onchange = function(element){
     teamToMember[teamName] = textArea.value;
-    //TODO: saving
-    console.log(JSON.stringify(teamToMember));
   }
   
   divGroup.appendChild(textArea);
@@ -142,6 +158,17 @@ function loadMemberView(teams) {
   for(var teamName in teams) {
     appendTeamMemberInput(teamName, teams[teamName]);
   }
+
+  // append save button
+  var saveBtn = document.createElement('button');
+  saveBtn.type = "button";
+  saveBtn.className = "btn btn-primary";
+  saveBtn.innerHTML = "Save";
+  saveBtn.onclick = function(element){
+    updateTeamMembers();
+  }
+
+  membersContainer.appendChild(saveBtn);
 }
 
 // load the stored teams
@@ -163,5 +190,4 @@ membersBtn.onclick = function(element) {
   chrome.storage.sync.get(["scrum-teams"], function(storedTeams) {
     loadMemberView(storedTeams["scrum-teams"]);
   });
-  // TODO: append save button
 };

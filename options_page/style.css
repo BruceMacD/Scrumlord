@@ -40,3 +40,9 @@ h3 {
     color: black;
     margin-left: 5%;
 }
+
+.btn-primary {
+    float: right;
+    margin-right: 5%;
+    margin-top: 5%;
+}
