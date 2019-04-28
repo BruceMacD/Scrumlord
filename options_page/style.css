@@ -35,3 +35,8 @@ h1 {
     background-color: grey;
     color: white;
 }
+
+h3 {
+    color: black;
+    margin-left: 5%;
+}
