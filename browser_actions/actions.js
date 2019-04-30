@@ -7,34 +7,69 @@ let navigation = document.getElementById('navigation');
 let team = document.getElementById('teamName');
 let member = document.getElementById('member');
 
-var teams = {};
-var currentTeam = {};
+var firstNode = null;
+var currentNode = null;
 
-function loadNext() {
-  if (currentTeam.length === 0) {
-    // team = next team
-  }
-  team.innerHTML = "test";
-  team.innerHTML = "test";
+// a node in a linked list of team members
+function Node(prev, teamName, personName, link, next) {
+  this.prev = prev;
+  this.teamName = teamName;
+  this.personName = personName;
+  this.link = link;
+  this.next = next;
+}
 
-  chrome.tabs.update({
-    url: "http://www.example.com/"
+async function loadTeams() {
+  chrome.storage.sync.get(["scrum-teams"], function(storedTeams) {
+    var teams = storedTeams["scrum-teams"];
+    for(var team in teams) {
+      for (var member in teams[team]) {
+        var newNode = new Node(currentNode, team, member, teams[team][member], null);
+        if (currentNode === null) {
+          firstNode = newNode;
+          console.log(firstNode);
+        } else {
+          currentNode.next = newNode;
+        }
+        currentNode = newNode;
+        console.log(currentNode);
+      }
+    }
   });
+  return 1;
+}
+
+function updateDisplay() {
+  team.innerHTML = currentNode.teamName;
+  member.innerHTML = currentNode.personName;
+  console.log(currentNode.link);
+  chrome.tabs.update({
+    // must be http://www.* format
+    url: String(currentNode.link)
+  });
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // hide to start
 title.style.display = "none";
 navigation.style.display = "none";
 
-startBtn.onclick = function(element) {
+startBtn.onclick = async function(element) {
   
   navigation.style.display = "inline";
   title.style.display = "inline";
   start.style.display = "none";
 
-  chrome.storage.sync.get(["scrum-teams"], function(storedTeams) {
-    teams = storedTeams["scrum-teams"];
-  });
+  await loadTeams();
 
-  console.log(teams[0]);
+  // gotta make sure the first node get set before continuing
+  // ... an async waterfall would work too
+  while (firstNode === null) {
+    await sleep(1000);
+  }
+  currentNode = firstNode;
+  updateDisplay();
 };
