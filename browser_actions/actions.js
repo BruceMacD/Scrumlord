@@ -1,6 +1,8 @@
 'use strict';
 
 let startBtn = document.getElementById('startBtn');
+let nextBtn = document.getElementById('nextBtn');
+let prevBtn = document.getElementById('prevBtn');
 let start = document.getElementById('start');
 let title = document.getElementById('title');
 let navigation = document.getElementById('navigation');
@@ -20,6 +22,9 @@ function Node(prev, teamName, personName, link, next) {
 }
 
 function updateDisplay() {
+  currentNode.next === null ? nextBtn.disabled = true : nextBtn.disabled = false;
+  currentNode.prev === null ? prevBtn.disabled = true : prevBtn.disabled = false;  
+
   team.innerHTML = currentNode.teamName;
   member.innerHTML = currentNode.personName;
   chrome.tabs.update({
@@ -32,7 +37,7 @@ function updateDisplay() {
 title.style.display = "none";
 navigation.style.display = "none";
 
-startBtn.onclick = async function(element) {
+startBtn.onclick = function(element) {
   
   navigation.style.display = "inline";
   title.style.display = "inline";
@@ -55,4 +60,14 @@ startBtn.onclick = async function(element) {
     currentNode = firstNode;
     updateDisplay();
   });
+};
+
+nextBtn.onclick = function(element) {
+  currentNode = currentNode.next;
+  updateDisplay();
+};
+
+prevBtn.onclick = function(element) {
+  currentNode = currentNode.prev;
+  updateDisplay();
 };

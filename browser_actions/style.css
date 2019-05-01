@@ -47,3 +47,7 @@ button:hover {
     float: right;
     margin-right: 5%;
 }
+
+button:disabled {
+    background-color: rgb(94, 94, 94);
+}
